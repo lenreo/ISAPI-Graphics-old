@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.swagger</groupId>
     <artifactId>swagger-spring</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>swagger-spring</name>
     <version>1.0.0</version>
     <properties>
@@ -10,6 +10,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <springfox-version>2.9.2</springfox-version>
+        <jetty-version>9.2.9.v20150224</jetty-version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
