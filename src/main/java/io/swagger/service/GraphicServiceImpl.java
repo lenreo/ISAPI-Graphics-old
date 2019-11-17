@@ -1,10 +1,14 @@
 package io.swagger.service;
 
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import io.swagger.model.Graphic;
 import io.swagger.model.Magnitude;
 
+@Service("GraphicService")
 public class GraphicServiceImpl implements GraphicService {
 
     private static List<Graphic> graphics;
