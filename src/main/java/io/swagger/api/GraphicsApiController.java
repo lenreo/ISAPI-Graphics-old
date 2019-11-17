@@ -2,12 +2,14 @@ package io.swagger.api;
 
 import java.io.File;
 import io.swagger.model.Graphic;
+import io.swagger.service.GraphicService;
 import io.swagger.model.Magnitude;
 import org.threeten.bp.OffsetDateTime;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -34,6 +36,9 @@ public class GraphicsApiController implements GraphicsApi {
 
     private final HttpServletRequest request;
 
+    @Autowired
+    private GraphicService graphicService;
+
     @org.springframework.beans.factory.annotation.Autowired
     public GraphicsApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
@@ -41,6 +46,12 @@ public class GraphicsApiController implements GraphicsApi {
     }
 
     public ResponseEntity<Void> addGraphic(@ApiParam(value = "Gráfica" ,required=true )  @Valid @RequestBody Graphic body) {
+
+        if (graphicService.check(body)) {
+            graphicService.add(body);
+        }
+
+
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
