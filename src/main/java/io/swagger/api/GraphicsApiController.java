@@ -4,7 +4,7 @@ import java.io.File;
 import io.swagger.model.Graphic;
 import io.swagger.service.GraphicService;
 import io.swagger.model.Magnitude;
-import org.threeten.bp.OffsetDateTime;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -24,6 +24,7 @@ import javax.validation.constraints.*;
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import org.threeten.bp.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-11-15T18:00:14.538Z[GMT]")
@@ -79,6 +80,7 @@ public class GraphicsApiController implements GraphicsApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
+               //Graphic graphic = graphicService.generate(magnitude, startDate, endDate);
                 return new ResponseEntity<Graphic>(objectMapper.readValue("{\n  \"data\" : \"data\",\n  \"magnitude\" : \"spo2\",\n  \"id\" : 0,\n  \"start_date\" : \"2000-01-23T04:56:07.000+00:00\"\n}", Graphic.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
@@ -86,7 +88,7 @@ public class GraphicsApiController implements GraphicsApi {
             }
         }
 
-        return new ResponseEntity<Graphic>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<File>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<File> generatePdf(@ApiParam(value = "ID de la gráfica",required=true) @PathVariable("id") Long id) {
@@ -118,6 +120,7 @@ public class GraphicsApiController implements GraphicsApi {
     }
 
     public ResponseEntity<Graphic> getGraphicById(@ApiParam(value = "ID de la gráfica",required=true) @PathVariable("id") Long id) {
+        Graphic graphic = graphicService.getById(id);
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
@@ -128,7 +131,8 @@ public class GraphicsApiController implements GraphicsApi {
             }
         }
 
-        return new ResponseEntity<Graphic>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<Graphic>(graphic, HttpStatus.OK);
+        //return new ResponseEntity<Graphic>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Void> sendEmail(@ApiParam(value = "ID de la gráfica",required=true) @PathVariable("id") Long id,@NotNull @ApiParam(value = "Dirección de correo", required = true) @Valid @RequestParam(value = "email", required = true) String email) {

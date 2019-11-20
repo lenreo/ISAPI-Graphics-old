@@ -5,12 +5,11 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import org.threeten.bp.OffsetDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 import io.swagger.model.Graphic;
-import io.swagger.model.Id;
 import io.swagger.model.Magnitude;
 
 @Service("GraphicService")
@@ -19,6 +18,13 @@ public class GraphicServiceImpl implements GraphicService {
     private static Map<Long, Graphic> graphics;
     static {
         graphics = new HashMap<>();
+
+        Graphic graphic = new Graphic();
+        graphic.setId(1L);
+        graphic.setMagnitude(Magnitude.BPM);
+        graphic.setData("{}");
+        graphic.setStartDate(new OffsetDateTime(null, null));
+        graphic.setEndDate(new OffsetDateTime(null, null));
     }
 
     @Override
@@ -70,7 +76,7 @@ public class GraphicServiceImpl implements GraphicService {
     }
 
 	@Override
-	public Graphic generate(Magnitude magnitude, Date startDate, Date endDate) {
+	public Graphic generate(Magnitude magnitude, OffsetDateTime startDate, OffsetDateTime endDate) {
         Graphic graphic = new Graphic();
 
         return graphic;
