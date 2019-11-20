@@ -3,10 +3,12 @@ package io.swagger.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.model.Magnitude;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -24,10 +26,10 @@ public class Graphic   {
   private Magnitude magnitude = null;
 
   @JsonProperty("start_date")
-  private OffsetDateTime startDate = null;
+  private LocalDateTime startDate = null;
 
   @JsonProperty("end_date")
-  private OffsetDateTime endDate = null;
+  private LocalDateTime endDate = null;
 
   @JsonProperty("data")
   private String data = null;
@@ -71,7 +73,7 @@ public class Graphic   {
     this.magnitude = magnitude;
   }
 
-  public Graphic startDate(OffsetDateTime startDate) {
+  public Graphic startDate(LocalDateTime startDate) {
     this.startDate = startDate;
     return this;
   }
@@ -83,15 +85,15 @@ public class Graphic   {
   @ApiModelProperty(value = "")
 
     @Valid
-    public OffsetDateTime getStartDate() {
+    public LocalDateTime getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(OffsetDateTime startDate) {
+  public void setStartDate(LocalDateTime startDate) {
     this.startDate = startDate;
   }
 
-  public Graphic endDate(OffsetDateTime endDate) {
+  public Graphic endDate(LocalDateTime endDate) {
     this.endDate = endDate;
     return this;
   }
@@ -103,11 +105,11 @@ public class Graphic   {
   @ApiModelProperty(value = "")
 
     @Valid
-    public OffsetDateTime getEndDate() {
+    public LocalDateTime getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(OffsetDateTime endDate) {
+  public void setEndDate(LocalDateTime endDate) {
     this.endDate = endDate;
   }
 

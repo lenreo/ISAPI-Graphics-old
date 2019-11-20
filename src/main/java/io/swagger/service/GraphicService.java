@@ -1,6 +1,6 @@
 package io.swagger.service;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import io.swagger.model.Graphic;
@@ -14,7 +14,7 @@ public interface GraphicService {
     public Graphic getById(Long id);
     public boolean deleteById(Long id);
     public List<Graphic> findByMagnitude(Magnitude magnitude);
-    public Graphic generate(Magnitude magnitude, OffsetDateTime startDate, OffsetDateTime endDate);
+    public Graphic generate(Magnitude magnitude, LocalDateTime startDate, LocalDateTime endDate);
 
     public byte[] generatePdf(Long id);
     public byte[] generatePng(Long id);
