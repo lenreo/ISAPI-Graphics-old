@@ -88,7 +88,7 @@ public class GraphicsApiController implements GraphicsApi {
             }
         }
 
-        return new ResponseEntity<File>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<Graphic>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<File> generatePdf(@ApiParam(value = "ID de la gráfica",required=true) @PathVariable("id") Long id) {
