@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import org.threeten.bp.OffsetDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -23,8 +23,8 @@ public class GraphicServiceImpl implements GraphicService {
         graphic.setId(1L);
         graphic.setMagnitude(Magnitude.BPM);
         graphic.setData("{}");
-        graphic.setStartDate(new OffsetDateTime(null, null));
-        graphic.setEndDate(new OffsetDateTime(null, null));
+        graphic.setStartDate(OffsetDateTime.now());
+        graphic.setEndDate(OffsetDateTime.now());
     }
 
     @Override

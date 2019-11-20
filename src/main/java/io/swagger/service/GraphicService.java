@@ -1,6 +1,6 @@
 package io.swagger.service;
 
-import org.threeten.bp.OffsetDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import io.swagger.model.Graphic;

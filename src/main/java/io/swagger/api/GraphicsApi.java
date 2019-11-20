@@ -8,7 +8,7 @@ package io.swagger.api;
 import java.io.File;
 import io.swagger.model.Graphic;
 import io.swagger.model.Magnitude;
-import org.threeten.bp.OffsetDateTime;
+import java.time.OffsetDateTime;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -30,7 +30,7 @@ import java.util.Map;
 public interface GraphicsApi {
 
     @ApiOperation(value = "Añadir nueva gráfica", nickname = "addGraphic", notes = "Añadir nueva gráfica", tags={ "graphics", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Operación válida"),
         @ApiResponse(code = 405, message = "No se pudo validar"),
         @ApiResponse(code = 500, message = "Error Interno") })
@@ -41,7 +41,7 @@ public interface GraphicsApi {
 
 
     @ApiOperation(value = "Elimina una determinada gráfica por ID", nickname = "deleteGraphicById", notes = "Elimina una gráfica", tags={ "graphics", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 400, message = "ID proporcionado no valido"),
         @ApiResponse(code = 404, message = "Gráfica no encontrada") })
     @RequestMapping(value = "/graphics/{id}",
@@ -50,61 +50,61 @@ public interface GraphicsApi {
 
 
     @ApiOperation(value = "Encuentra gráficas por magnitud", nickname = "findGraphicByMagnitude", notes = "Busca las gráficas que sean de una determinada magnitud", response = Graphic.class, responseContainer = "List", tags={ "graphics", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Operación válida", response = Graphic.class, responseContainer = "List"),
         @ApiResponse(code = 405, message = "No se pudo validar") })
     @RequestMapping(value = "/graphics/findByMagnitude",
-        produces = { "application/xml", "application/json" }, 
+        produces = { "application/xml", "application/json" },
         method = RequestMethod.GET)
     ResponseEntity<List<Graphic>> findGraphicByMagnitude(@NotNull @ApiParam(value = "Magnitud de las medidas", required = true) @Valid @RequestParam(value = "magnitude", required = true) Magnitude magnitude);
 
 
     @ApiOperation(value = "Genera una gráfica", nickname = "generate", notes = "Genera una gráfica dada una magnitud y un rango de fechas", response = Graphic.class, tags={ "graphics", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Operación válida", response = Graphic.class),
         @ApiResponse(code = 400, message = "Bad request. User ID must be an integer and larger than 0."),
         @ApiResponse(code = 405, message = "No se pudo validar") })
     @RequestMapping(value = "/graphics/generate",
-        produces = { "application/xml", "application/json" }, 
+        produces = { "application/xml", "application/json" },
         method = RequestMethod.GET)
     ResponseEntity<Graphic> generate(@NotNull @ApiParam(value = "Magnitud de las medidas", required = true) @Valid @RequestParam(value = "magnitude", required = true) Magnitude magnitude,@NotNull @ApiParam(value = "Fecha de inicio del rango temporal de las medidas", required = true) @Valid @RequestParam(value = "startDate", required = true) OffsetDateTime startDate,@NotNull @ApiParam(value = "Fecha de fin del rango temporal de las medidas", required = true) @Valid @RequestParam(value = "endDate", required = true) OffsetDateTime endDate);
 
 
     @ApiOperation(value = "Devuelve el PDF de una gráfica", nickname = "generatePdf", notes = "Encontrar una determinada gráfica por ID y generar PDF", response = File.class, tags={ "graphics", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Operacion valida", response = File.class),
         @ApiResponse(code = 400, message = "ID proporcionado no valido"),
         @ApiResponse(code = 404, message = "Gráfica no encontrada") })
     @RequestMapping(value = "/graphics/{id}/toPdf",
-        produces = { "application/pdf" }, 
+        produces = { "application/pdf" },
         method = RequestMethod.GET)
     ResponseEntity<File> generatePdf(@ApiParam(value = "ID de la gráfica",required=true) @PathVariable("id") Long id);
 
 
     @ApiOperation(value = "Devuelve el PNG de una gráfica", nickname = "generatePng", notes = "Encontrar una determinada gráfica por ID y generar PNG", response = File.class, tags={ "graphics", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Operacion valida", response = File.class),
         @ApiResponse(code = 400, message = "ID proporcionado no valido"),
         @ApiResponse(code = 404, message = "Gráfica no encontrada") })
     @RequestMapping(value = "/graphics/{id}/toPng",
-        produces = { "image/png" }, 
+        produces = { "image/png" },
         method = RequestMethod.GET)
     ResponseEntity<File> generatePng(@ApiParam(value = "ID de la gráfica",required=true) @PathVariable("id") Long id);
 
 
     @ApiOperation(value = "Encontrar una determinada gráfica por ID", nickname = "getGraphicById", notes = "Devuelve una gráfica", response = Graphic.class, tags={ "graphics", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Operación válida", response = Graphic.class),
         @ApiResponse(code = 400, message = "ID proporcionado no valido"),
         @ApiResponse(code = 404, message = "Gráfica no encontrada") })
     @RequestMapping(value = "/graphics/{id}",
-        produces = { "application/xml", "application/json" }, 
+        produces = { "application/xml", "application/json" },
         method = RequestMethod.GET)
     ResponseEntity<Graphic> getGraphicById(@ApiParam(value = "ID de la gráfica",required=true) @PathVariable("id") Long id);
 
 
     @ApiOperation(value = "Envía una gráfica por email", nickname = "sendEmail", notes = "Encontrar una determinada gráfica por ID y enviarla por email", tags={ "graphics", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Operacion válida"),
         @ApiResponse(code = 400, message = "Datos de entrada no válidos"),
         @ApiResponse(code = 404, message = "Gráfica no encontrada") })
@@ -114,7 +114,7 @@ public interface GraphicsApi {
 
 
     @ApiOperation(value = "Actualizar una gráfica", nickname = "updateGraphic", notes = "Actualizar una gráfica", tags={ "graphics", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Operación válida"),
         @ApiResponse(code = 400, message = "ID proporcionado no válida"),
         @ApiResponse(code = 404, message = "Gráfica no encontrada"),
