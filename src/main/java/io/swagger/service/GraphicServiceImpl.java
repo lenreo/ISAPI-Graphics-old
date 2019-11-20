@@ -1,78 +1,94 @@
 package io.swagger.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
 import io.swagger.model.Graphic;
+import io.swagger.model.Id;
 import io.swagger.model.Magnitude;
 
 @Service("GraphicService")
 public class GraphicServiceImpl implements GraphicService {
 
-    private static List<Graphic> graphics;
+    private static Map<Long, Graphic> graphics;
     static {
-        graphics = new ArrayList<>();
+        graphics = new HashMap<>();
     }
 
     @Override
-    public void add(Graphic graphic) {
-        graphics.add(graphic);
+    public boolean add(Graphic graphic) {
+        graphics.put(graphic.getId(), graphic);
+        return true;
     }
 
 	@Override
 	public boolean check(Graphic graphic) {
-		// TODO Auto-generated method stub
-		return false;
+		return (null != graphic.getData() && !graphic.getData().isEmpty());
 	}
 
 	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
+	public boolean update(Graphic graphic) {
+        boolean result = false;
+        if (graphics.containsKey(graphic.getId())) {
+            result = add(graphic);
+        }
+        return result;
 	}
 
 	@Override
-	public void getById(Long id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
+	public Graphic getById(Long id) {
+		return graphics.get(id);
 
 	}
 
 	@Override
-	public void findByMagnitude(Magnitude magnitude) {
-		// TODO Auto-generated method stub
-
+	public boolean deleteById(Long id) {
+        boolean result = false;
+        if (graphics.containsKey(id)) {
+            result = (graphics.remove(id) != null);
+        }
+        return result;
 	}
 
 	@Override
-	public void generate() {
-		// TODO Auto-generated method stub
+	public List<Graphic> findByMagnitude(Magnitude magnitude) {
+        List<Graphic> listGraphics = new ArrayList<>();
 
+        graphics.forEach((k, v) -> {
+            if (magnitude.equals(v.getMagnitude())) {
+                listGraphics.add(v);
+            }
+        });
+
+        return listGraphics;
+    }
+
+	@Override
+	public Graphic generate(Magnitude magnitude, Date startDate, Date endDate) {
+        Graphic graphic = new Graphic();
+
+        return graphic;
 	}
 
 	@Override
-	public void generatePdf() {
-		// TODO Auto-generated method stub
-
+	public byte[] generatePdf(Long id) {
+		return null;
 	}
 
 	@Override
-	public void generatePng() {
-		// TODO Auto-generated method stub
-
+	public byte[] generatePng(Long id) {
+		return null;
 	}
 
 	@Override
-	public void sendEmail() {
-		// TODO Auto-generated method stub
-
+	public boolean sendEmail(Long id) {
+		return true;
 	}
 
 }
