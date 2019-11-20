@@ -48,6 +48,8 @@ public class GraphicsApiController implements GraphicsApi {
 
     public ResponseEntity<Void> addGraphic(@ApiParam(value = "Gráfica" ,required=true )  @Valid @RequestBody Graphic body) {
 
+        log.info("addGraphic");
+
         if (graphicService.check(body)) {
             graphicService.add(body);
         }
@@ -58,11 +60,13 @@ public class GraphicsApiController implements GraphicsApi {
     }
 
     public ResponseEntity<Void> deleteGraphicById(@ApiParam(value = "ID de la gráfica",required=true) @PathVariable("id") Long id) {
+        log.info("deleteGraphicById");
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<List<Graphic>> findGraphicByMagnitude(@NotNull @ApiParam(value = "Magnitud de las medidas", required = true) @Valid @RequestParam(value = "magnitude", required = true) Magnitude magnitude) {
+        log.info("findGraphicByMagnitude");
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
@@ -77,6 +81,7 @@ public class GraphicsApiController implements GraphicsApi {
     }
 
     public ResponseEntity<Graphic> generate(@NotNull @ApiParam(value = "Magnitud de las medidas", required = true) @Valid @RequestParam(value = "magnitude", required = true) Magnitude magnitude,@NotNull @ApiParam(value = "Fecha de inicio del rango temporal de las medidas", required = true) @Valid @RequestParam(value = "startDate", required = true) OffsetDateTime startDate,@NotNull @ApiParam(value = "Fecha de fin del rango temporal de las medidas", required = true) @Valid @RequestParam(value = "endDate", required = true) OffsetDateTime endDate) {
+        log.info("generate");
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
@@ -92,6 +97,7 @@ public class GraphicsApiController implements GraphicsApi {
     }
 
     public ResponseEntity<File> generatePdf(@ApiParam(value = "ID de la gráfica",required=true) @PathVariable("id") Long id) {
+        log.info("generatePdf");
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
@@ -106,6 +112,7 @@ public class GraphicsApiController implements GraphicsApi {
     }
 
     public ResponseEntity<File> generatePng(@ApiParam(value = "ID de la gráfica",required=true) @PathVariable("id") Long id) {
+        log.info("generatePng");
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
@@ -120,6 +127,7 @@ public class GraphicsApiController implements GraphicsApi {
     }
 
     public ResponseEntity<Graphic> getGraphicById(@ApiParam(value = "ID de la gráfica",required=true) @PathVariable("id") Long id) {
+        log.info("getGraphicById");
         Graphic graphic = graphicService.getById(id);
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
@@ -136,11 +144,13 @@ public class GraphicsApiController implements GraphicsApi {
     }
 
     public ResponseEntity<Void> sendEmail(@ApiParam(value = "ID de la gráfica",required=true) @PathVariable("id") Long id,@NotNull @ApiParam(value = "Dirección de correo", required = true) @Valid @RequestParam(value = "email", required = true) String email) {
+        log.info("sendEmail");
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Void> updateGraphic(@ApiParam(value = "Gráfica" ,required=true )  @Valid @RequestBody Graphic body) {
+        log.info("updateGraphic");
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }

@@ -49,7 +49,17 @@ public class GraphicServiceImpl implements GraphicService {
 
 	@Override
 	public Graphic getById(Long id) {
-		return graphics.get(id);
+        //return graphics.get(id);
+
+                Graphic graphic = new Graphic();
+        graphic.setId(1L);
+        graphic.setMagnitude(Magnitude.BPM);
+        graphic.setData("{}");
+        graphic.setStartDate(OffsetDateTime.now());
+        graphic.setEndDate(OffsetDateTime.now());
+
+
+        return graphic;
 
 	}
 
