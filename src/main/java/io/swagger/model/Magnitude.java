@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-11-21T18:18:43.197Z[GMT]")
-public class Magnitude   {
+public class Magnitude  extends Long {
 
   @Override
   public boolean equals(java.lang.Object o) {
