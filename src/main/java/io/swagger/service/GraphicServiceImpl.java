@@ -5,7 +5,11 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import org.threeten.bp.OffsetDateTime;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,17 +33,25 @@ public class GraphicServiceImpl implements GraphicService {
         graphic.setId(1L);
         graphic.setMagnitude(Magnitude.BPM);
         graphic.setData("{}");
-        graphic.setStartDate(LocalDateTime.now());
-        graphic.setEndDate(LocalDateTime.now());
+        graphic.setStartDate(OffsetDateTime.now());
+        graphic.setEndDate(OffsetDateTime.now());
 
         graphics.put(graphic.getId(), graphic);
     }
 
+    private Long generateId() {
+        return Long.valueOf(graphics.size() + 1);
+    }
     @Override
-    public boolean add(Graphic graphic) {
+    public Long add(Graphic graphic) {
         log.info("add: " + graphic.toString());
+
+        if (null == graphic.getId()) {
+            Long id = generateId();
+            graphic.setId(id);
+        }
         graphics.put(graphic.getId(), graphic);
-        return true;
+        return graphic.getId();
     }
 
 	@Override
@@ -53,7 +65,7 @@ public class GraphicServiceImpl implements GraphicService {
         log.info("update: " + graphic.toString());
         boolean result = false;
         if (graphics.containsKey(graphic.getId())) {
-            result = add(graphic);
+            result = graphic.getId().equals(add(graphic));
         }
         return result;
 	}
@@ -89,7 +101,7 @@ public class GraphicServiceImpl implements GraphicService {
     }
 
 	@Override
-	public Graphic generate(Magnitude magnitude, LocalDateTime startDate, LocalDateTime endDate) {
+	public Graphic generate(Magnitude magnitude, OffsetDateTime startDate, OffsetDateTime endDate) {
         log.info("generate: " + magnitude.toString() + " " + startDate + " " + endDate);
         Graphic graphic = new Graphic();
 
@@ -105,7 +117,17 @@ public class GraphicServiceImpl implements GraphicService {
 	@Override
 	public byte[] generatePng(Long id) {
         log.info("generatePng: " + id);
-		return null;
+
+        File file = new File("/resources/image.png");
+        byte[] fileContent = null;
+		try {
+			fileContent = Files.readAllBytes(file.toPath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return fileContent;
 	}
 
 	@Override

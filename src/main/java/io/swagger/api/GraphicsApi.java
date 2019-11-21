@@ -8,7 +8,7 @@ package io.swagger.api;
 import java.io.File;
 import io.swagger.model.Graphic;
 import io.swagger.model.Magnitude;
-import java.time.LocalDateTime;
+import org.threeten.bp.OffsetDateTime;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -37,7 +37,7 @@ public interface GraphicsApi {
     @RequestMapping(value = "/graphics",
         consumes = { "application/json", "application/xml" },
         method = RequestMethod.POST)
-    ResponseEntity<Void> addGraphic(@ApiParam(value = "Gráfica" ,required=true )  @Valid @RequestBody Graphic body);
+    ResponseEntity<Long> addGraphic(@ApiParam(value = "Gráfica" ,required=true )  @Valid @RequestBody Graphic body);
 
 
     @ApiOperation(value = "Elimina una determinada gráfica por ID", nickname = "deleteGraphicById", notes = "Elimina una gráfica", tags={ "graphics", })
@@ -67,7 +67,7 @@ public interface GraphicsApi {
     @RequestMapping(value = "/graphics/generate",
         produces = { "application/xml", "application/json" },
         method = RequestMethod.GET)
-    ResponseEntity<Graphic> generate(@NotNull @ApiParam(value = "Magnitud de las medidas", required = true) @Valid @RequestParam(value = "magnitude", required = true) Magnitude magnitude,@NotNull @ApiParam(value = "Fecha de inicio del rango temporal de las medidas", required = true) @Valid @RequestParam(value = "startDate", required = true) LocalDateTime startDate,@NotNull @ApiParam(value = "Fecha de fin del rango temporal de las medidas", required = true) @Valid @RequestParam(value = "endDate", required = true) LocalDateTime endDate);
+    ResponseEntity<Graphic> generate(@NotNull @ApiParam(value = "Magnitud de las medidas", required = true) @Valid @RequestParam(value = "magnitude", required = true) Magnitude magnitude,@NotNull @ApiParam(value = "Fecha de inicio del rango temporal de las medidas", required = true) @Valid @RequestParam(value = "startDate", required = true) OffsetDateTime startDate,@NotNull @ApiParam(value = "Fecha de fin del rango temporal de las medidas", required = true) @Valid @RequestParam(value = "endDate", required = true) OffsetDateTime endDate);
 
 
     @ApiOperation(value = "Devuelve el PDF de una gráfica", nickname = "generatePdf", notes = "Encontrar una determinada gráfica por ID y generar PDF", response = File.class, tags={ "graphics", })
