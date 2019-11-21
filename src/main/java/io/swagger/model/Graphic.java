@@ -3,11 +3,8 @@ package io.swagger.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.model.Magnitude;
 import org.threeten.bp.OffsetDateTime;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -17,13 +14,13 @@ import javax.validation.constraints.*;
  * Graphic
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-11-15T18:00:14.538Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-11-21T18:18:43.197Z[GMT]")
 public class Graphic   {
   @JsonProperty("id")
   private Long id = null;
 
   @JsonProperty("magnitude")
-  private Magnitude magnitude = null;
+  private Long magnitude = null;
 
   @JsonProperty("start_date")
   private OffsetDateTime startDate = null;
@@ -44,7 +41,7 @@ public class Graphic   {
    * @return id
   **/
   @ApiModelProperty(value = "")
-
+  
     public Long getId() {
     return id;
   }
@@ -53,7 +50,7 @@ public class Graphic   {
     this.id = id;
   }
 
-  public Graphic magnitude(Magnitude magnitude) {
+  public Graphic magnitude(Long magnitude) {
     this.magnitude = magnitude;
     return this;
   }
@@ -63,13 +60,12 @@ public class Graphic   {
    * @return magnitude
   **/
   @ApiModelProperty(value = "")
-
-    @Valid
-    public Magnitude getMagnitude() {
+  
+    public Long getMagnitude() {
     return magnitude;
   }
 
-  public void setMagnitude(Magnitude magnitude) {
+  public void setMagnitude(Long magnitude) {
     this.magnitude = magnitude;
   }
 
@@ -83,7 +79,7 @@ public class Graphic   {
    * @return startDate
   **/
   @ApiModelProperty(value = "")
-
+  
     @Valid
     public OffsetDateTime getStartDate() {
     return startDate;
@@ -103,7 +99,7 @@ public class Graphic   {
    * @return endDate
   **/
   @ApiModelProperty(value = "")
-
+  
     @Valid
     public OffsetDateTime getEndDate() {
     return endDate;
@@ -123,7 +119,7 @@ public class Graphic   {
    * @return data
   **/
   @ApiModelProperty(value = "")
-
+  
     public String getData() {
     return data;
   }
@@ -158,7 +154,7 @@ public class Graphic   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Graphic {\n");
-
+    
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    magnitude: ").append(toIndentedString(magnitude)).append("\n");
     sb.append("    startDate: ").append(toIndentedString(startDate)).append("\n");

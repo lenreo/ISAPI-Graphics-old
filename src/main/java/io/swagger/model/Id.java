@@ -9,7 +9,7 @@ import javax.validation.constraints.*;
  * Id
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-11-15T18:00:14.538Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-11-21T18:18:43.197Z[GMT]")
 public class Id   {
 
   @Override
