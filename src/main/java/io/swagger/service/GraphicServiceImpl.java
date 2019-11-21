@@ -31,7 +31,7 @@ public class GraphicServiceImpl implements GraphicService {
 
         Graphic graphic = new Graphic();
         graphic.setId(1L);
-        graphic.setMagnitude(Magnitude.BPM);
+        graphic.setMagnitude(0L);
         graphic.setData("{}");
         graphic.setStartDate(OffsetDateTime.now());
         graphic.setEndDate(OffsetDateTime.now());
